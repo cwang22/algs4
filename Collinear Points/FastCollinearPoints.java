@@ -9,11 +9,9 @@ import java.util.List;
 
 public class FastCollinearPoints {
     private List<LineSegment> ls = new ArrayList<>();
-    private List<Double> slopes = new ArrayList<>();
-    private List<Point> endpoints = new ArrayList<>();
 
     public FastCollinearPoints(Point[] originalPoints) {
-        if (originalPoints == null) throw new java.lang.NullPointerException();
+        if (originalPoints == null) throw new NullPointerException();
         Point[] points = originalPoints.clone();
         Arrays.sort(points);
         validate(points);
@@ -34,7 +32,7 @@ public class FastCollinearPoints {
                     current.add(copy[j]);
                 } else {
                     if (current.size() > 3) {
-                        addSegment(current, slope);
+                        addSegment(current, p);
                     }
                     current.clear();
                     current.add(p);
@@ -42,7 +40,7 @@ public class FastCollinearPoints {
                     slope = currentSlope;
                 }
             }
-            if (current.size() > 3) addSegment(current, slope);
+            if (current.size() > 3) addSegment(current, p);
         }
     }
 
@@ -54,15 +52,11 @@ public class FastCollinearPoints {
         return ls.toArray(new LineSegment[ls.size()]);
     }
 
-    private void addSegment(List<Point> current, double slope) {
+    private void addSegment(List<Point> current, Point p) {
         Collections.sort(current);
         Point min = current.get(0);
+        if (!min.equals(p)) return;
         Point max = current.get(current.size() - 1);
-        for (int i = 0; i < endpoints.size(); i++) {
-            if (slopes.get(i).equals(slope) && endpoints.get(i).compareTo(max) == 0) return;
-        }
-        slopes.add(slope);
-        endpoints.add(max);
         ls.add(new LineSegment(min, max));
     }
 
