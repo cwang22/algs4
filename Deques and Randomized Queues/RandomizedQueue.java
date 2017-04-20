@@ -10,21 +10,20 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public RandomizedQueue() {
         items = (Item[]) new Object[2];
         size = 0;
-    }                // construct an empty randomized queue
+    }
 
     public boolean isEmpty() {
         return size == 0;
-    }               // is the queue empty?
+    }
 
     public int size() {
         return size;
-    }              // return the number of items on the queue
+    }
 
     public void enqueue(Item item) {
         if (item == null) throw new NullPointerException();
         items[size++] = item;
         if (size == items.length) resize(2 * items.length);
-
     }
 
     private void resize(int n) {

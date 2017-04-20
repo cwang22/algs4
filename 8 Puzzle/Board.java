@@ -40,11 +40,11 @@ public class Board {
             }
         }
         return result;
-    }            // sum of Manhattan distances between blocks and goal
+    }
 
     public boolean isGoal() {
         return hamming() == 0;
-    }// is this board the goal board?
+    }
 
     public Board twin() {
         Board twin = new Board(blocks);
@@ -58,7 +58,6 @@ public class Board {
             }
         }
         return twin;
-
     }
 
     public boolean equals(Object y) {
@@ -75,13 +74,13 @@ public class Board {
     }
 
     public Iterable<Board> neighbors() {
-        int empty_i = -1, empty_j = -1;
+        int emptyI = -1, emptyJ = -1;
         outer:
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (blocks[i][j] == 0) {
-                    empty_i = i;
-                    empty_j = j;
+                    emptyI = i;
+                    emptyJ = j;
                     break outer;
                 }
             }
@@ -89,24 +88,24 @@ public class Board {
 
         List<Board> neighbors = new ArrayList<>();
         Board board;
-        if (empty_i > 0) {
+        if (emptyI > 0) {
             board = new Board(blocks);
-            board.swap(empty_i, empty_j, empty_i - 1, empty_j);
+            board.swap(emptyI, emptyJ, emptyI - 1, emptyJ);
             neighbors.add(board);
         }
-        if (empty_i < n - 1) {
+        if (emptyI < n - 1) {
             board = new Board(blocks);
-            board.swap(empty_i, empty_j, empty_i + 1, empty_j);
+            board.swap(emptyI, emptyJ, emptyI + 1, emptyJ);
             neighbors.add(board);
         }
-        if (empty_j > 0) {
+        if (emptyJ > 0) {
             board = new Board(blocks);
-            board.swap(empty_i, empty_j, empty_i, empty_j - 1);
+            board.swap(emptyI, emptyJ, emptyI, emptyJ - 1);
             neighbors.add(board);
         }
-        if (empty_j < n - 1) {
+        if (emptyJ < n - 1) {
             board = new Board(blocks);
-            board.swap(empty_i, empty_j, empty_i, empty_j + 1);
+            board.swap(emptyI, emptyJ, emptyI, emptyJ + 1);
             neighbors.add(board);
         }
         return neighbors;
@@ -132,13 +131,5 @@ public class Board {
         return s.toString();
     }
 
-    public static void main(String[] args) {
-        int[][] board = {
-                {1, 2, 3},
-                {4, 5, 6},
-                {7, 8, 0}
-        };
-        Board b = new Board(board);
-        System.out.println(b.hamming());
-    }
+    public static void main(String[] args) {}
 }

@@ -76,7 +76,7 @@ public class Deque<Item> implements Iterable<Item> {
         if (isEmpty()) first = null;
         else last.next = null;
         return n.item;
-    }       // remove and return the item from the end
+    }
 
     public Iterator<Item> iterator() {
         return new DequeIterator<>(first);

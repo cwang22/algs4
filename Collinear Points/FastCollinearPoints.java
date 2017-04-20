@@ -12,7 +12,11 @@ public class FastCollinearPoints {
 
     public FastCollinearPoints(Point[] originalPoints) {
         if (originalPoints == null) throw new NullPointerException();
+
+        //clone the input array so it's immutable
         Point[] points = originalPoints.clone();
+
+        //check if their is null or duplicated points
         Arrays.sort(points);
         validate(points);
 
@@ -55,7 +59,12 @@ public class FastCollinearPoints {
     private void addSegment(List<Point> current, Point p) {
         Collections.sort(current);
         Point min = current.get(0);
+
+        /* All line segments not started with p are duplicated ones or subsegments
+         * this avoids using extra memory to store endpoints/slopes or time to loop through them
+         */
         if (!min.equals(p)) return;
+
         Point max = current.get(current.size() - 1);
         ls.add(new LineSegment(min, max));
     }
@@ -68,7 +77,6 @@ public class FastCollinearPoints {
     }
 
     public static void main(String[] args) {
-
         // read the n points from a file
         In in = new In(args[0]);
         int n = in.readInt();

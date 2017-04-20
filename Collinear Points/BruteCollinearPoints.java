@@ -11,9 +11,14 @@ public class BruteCollinearPoints {
 
     public BruteCollinearPoints(Point[] originalPoints) {
         if (originalPoints == null) throw new java.lang.NullPointerException();
+
+        //clone the input array so it's immutable
         Point[] points = originalPoints.clone();
+
+        //check if their is null or duplicated points
         Arrays.sort(points);
         validate(points);
+        
         List<LineSegment> ls = new ArrayList<>();
         for (int i = 0; i < points.length - 3; i++) {
             for (int j = i + 1; j < points.length - 2; j++) {
@@ -48,7 +53,7 @@ public class BruteCollinearPoints {
     }
 
     public static void main(String[] args) {
-
+        // read the n points from a file
         In in = new In(args[0]);
         int n = in.readInt();
         Point[] points = new Point[n];

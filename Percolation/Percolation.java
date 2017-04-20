@@ -9,7 +9,11 @@ public class Percolation {
         if (n <= 0) throw new IllegalArgumentException();
         this.n = n;
         sites = new boolean[n][n];
+
+        // n * n sites plus virtual top / bottom
         uf = new WeightedQuickUnionUF(n * n + 2);
+
+        // only virtual top to avoid backwash
         buf = new WeightedQuickUnionUF(n * n + 1);
 
         for (int i = 1; i <= n; i++) {

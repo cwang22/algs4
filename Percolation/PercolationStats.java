@@ -22,7 +22,7 @@ public class PercolationStats {
 
     public double mean() {
         return StdStats.mean(x);
-    }               // sample mean of percolation threshold
+    }
 
     public double stddev() {
         return StdStats.stddev(x);

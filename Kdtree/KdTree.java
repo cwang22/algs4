@@ -2,7 +2,6 @@ import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.RectHV;
 import edu.princeton.cs.algs4.StdDraw;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,12 +21,14 @@ public class KdTree {
 
         private Node(Point2D key, Node parent) {
             this.key = key;
-
-            if (parent == null) {
+            
+            if (parent == null) { //root node
                 this.isVertical = true;
                 this.rect = new RectHV(0, 0, 1, 1);
             } else {
                 this.isVertical = !parent.isVertical;
+
+                //only calcuate Rectangle when creating a new node
                 if (parent.compareTo(key) > 0) {
                     if (parent.isVertical) {
                         this.rect = new RectHV(parent.rect.xmin(), parent.rect.ymin(), parent.rect.xmax(), parent.key.y());
@@ -48,10 +49,8 @@ public class KdTree {
             if (key.equals(p)) return 0;
             if (isVertical) {
                 if (key.y() < p.y()) return -1;
-
                 return 1;
             } else {
-
                 if (key.x() < p.x()) return -1;
                 return 1;
             }
@@ -126,7 +125,6 @@ public class KdTree {
         List<Point2D> list = new ArrayList<>();
         range(list, root, rect);
         return list;
-
     }
 
     private void range(List<Point2D> list, Node node, RectHV rect) {
@@ -155,7 +153,7 @@ public class KdTree {
             distance = currentDistance;
         }
 
-        //search closer side first
+        //search closer side first so it's more likely to find a closer point before searching the far side
         if (node.compareTo(p) > 0) {
             nearest(node.left, p);
             nearest(node.right, p);

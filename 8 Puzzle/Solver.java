@@ -60,7 +60,7 @@ public class Solver {
                     PQ.insert(next);
                 }
             }
-            
+
             Node twinCurrent = twinPQ.delMin();
             if (twinCurrent.board.hamming() == 0) {
                 break;
