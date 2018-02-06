@@ -47,8 +47,8 @@ public class SAP {
         int ancestor = -1;
 
         CalculateSAP(int v, int w) {
-            validates(v);
-            validates(w);
+            validate(v);
+            validate(w);
             BreadthFirstDirectedPaths pathFromV = new BreadthFirstDirectedPaths(G, v);
             BreadthFirstDirectedPaths pathFromW = new BreadthFirstDirectedPaths(G, w);
             calculate(pathFromV, pathFromW);
@@ -59,11 +59,11 @@ public class SAP {
             if (v == null || w == null) throw new IllegalArgumentException();
 
             for (int i : v) {
-                validates(i);
+                validate(i);
             }
 
             for (int i : w) {
-                validates(i);
+                validate(i);
             }
 
             BreadthFirstDirectedPaths pathFromV = new BreadthFirstDirectedPaths(G, v);
@@ -83,7 +83,7 @@ public class SAP {
             length = length == Integer.MAX_VALUE ? -1 : length;
         }
 
-        private void validates(int i) {
+        private void validate(int i) {
             if (i < 0 || i >= G.V()) throw new IllegalArgumentException();
         }
     }
