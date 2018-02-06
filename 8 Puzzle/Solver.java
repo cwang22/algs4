@@ -25,10 +25,12 @@ public class Solver {
         private Deque<Board> path() {
             Deque<Board> queue = new ArrayDeque<>();
             Node current = this;
+
             while (current != null) {
                 queue.addFirst(current.board);
                 current = current.prev;
             }
+
             return queue;
         }
 
@@ -50,6 +52,7 @@ public class Solver {
 
         while (true) {
             Node current = PQ.delMin();
+
             if (current.board.isGoal()) {
                 solution = current.path();
                 break;
@@ -62,6 +65,7 @@ public class Solver {
             }
 
             Node twinCurrent = twinPQ.delMin();
+
             if (twinCurrent.board.hamming() == 0) {
                 break;
             } else {
@@ -91,6 +95,7 @@ public class Solver {
         In in = new In(args[0]);
         int n = in.readInt();
         int[][] blocks = new int[n][n];
+        
         for (int i = 0; i < n; i++)
             for (int j = 0; j < n; j++)
                 blocks[i][j] = in.readInt();

@@ -9,6 +9,7 @@ public class Board {
     public Board(int[][] blocks) {
         n = blocks.length;
         this.blocks = new int[n][n];
+        
         for (int i = 0; i < n; i++) {
             this.blocks[i] = Arrays.copyOf(blocks[i], n);
         }
@@ -20,17 +21,20 @@ public class Board {
 
     public int hamming() {
         int result = 0;
+
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (blocks[i][j] == 0) continue;
                 if (blocks[i][j] != i * dimension() + j + 1) result++;
             }
         }
+
         return result;
     }
 
     public int manhattan() {
         int result = 0;
+
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (blocks[i][j] == 0) continue;
@@ -39,6 +43,7 @@ public class Board {
                 result += Math.abs(oi - i) + Math.abs(oj - j);
             }
         }
+
         return result;
     }
 
@@ -48,6 +53,7 @@ public class Board {
 
     public Board twin() {
         Board twin = new Board(blocks);
+
         outer:
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n - 1; j++) {
@@ -57,6 +63,7 @@ public class Board {
                 }
             }
         }
+
         return twin;
     }
 
@@ -65,16 +72,19 @@ public class Board {
         if (y.getClass() != Board.class) return false;
         Board that = (Board) y;
         if (that.n != this.n) return false;
+
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (that.blocks[i][j] != this.blocks[i][j]) return false;
             }
         }
+
         return true;
     }
 
     public Iterable<Board> neighbors() {
         int emptyI = -1, emptyJ = -1;
+
         outer:
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -88,26 +98,31 @@ public class Board {
 
         List<Board> neighbors = new ArrayList<>();
         Board board;
+
         if (emptyI > 0) {
             board = new Board(blocks);
             board.swap(emptyI, emptyJ, emptyI - 1, emptyJ);
             neighbors.add(board);
         }
+
         if (emptyI < n - 1) {
             board = new Board(blocks);
             board.swap(emptyI, emptyJ, emptyI + 1, emptyJ);
             neighbors.add(board);
         }
+
         if (emptyJ > 0) {
             board = new Board(blocks);
             board.swap(emptyI, emptyJ, emptyI, emptyJ - 1);
             neighbors.add(board);
         }
+
         if (emptyJ < n - 1) {
             board = new Board(blocks);
             board.swap(emptyI, emptyJ, emptyI, emptyJ + 1);
             neighbors.add(board);
         }
+
         return neighbors;
 
     }
@@ -122,12 +137,14 @@ public class Board {
         StringBuilder s = new StringBuilder();
         s.append(n);
         s.append("\n");
+
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 s.append(String.format("%2d ", blocks[i][j]));
             }
             s.append("\n");
         }
+
         return s.toString();
     }
 

@@ -30,8 +30,10 @@ public class FastCollinearPoints {
             current.add(p);
             current.add(copy[1]);
             double slope = p.slopeTo(copy[1]);
+
             for (int j = 2; j < copy.length; j++) {
                 double currentSlope = p.slopeTo(copy[j]);
+
                 if (currentSlope == slope) {
                     current.add(copy[j]);
                 } else {
@@ -44,6 +46,7 @@ public class FastCollinearPoints {
                     slope = currentSlope;
                 }
             }
+
             if (current.size() > 3) addSegment(current, p);
         }
     }
@@ -81,6 +84,7 @@ public class FastCollinearPoints {
         In in = new In(args[0]);
         int n = in.readInt();
         Point[] points = new Point[n];
+
         for (int i = 0; i < n; i++) {
             int x = in.readInt();
             int y = in.readInt();
@@ -91,17 +95,21 @@ public class FastCollinearPoints {
         StdDraw.enableDoubleBuffering();
         StdDraw.setXscale(0, 32768);
         StdDraw.setYscale(0, 32768);
+
         for (Point p : points) {
             p.draw();
         }
+
         StdDraw.show();
 
         // print and draw the line segments
         FastCollinearPoints collinear = new FastCollinearPoints(points);
+
         for (LineSegment segment : collinear.segments()) {
             StdOut.println(segment);
             segment.draw();
         }
+        
         StdDraw.show();
     }
 }

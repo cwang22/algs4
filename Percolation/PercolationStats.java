@@ -7,16 +7,18 @@ public class PercolationStats {
     public PercolationStats(int n, int trials) {
         if (n <= 0 || trials <= 0) throw new IllegalArgumentException();
         x = new double[trials];
+
         for (int i = 0; i < trials; i++) {
             Percolation p = new Percolation(n);
+
             while (!p.percolates()) {
                 int row = StdRandom.uniform(1, n + 1);
                 int col = StdRandom.uniform(1, n + 1);
                 if (p.isOpen(row, col)) continue;
                 p.open(row, col);
             }
+            
             x[i] = (double) p.numberOfOpenSites() / (n * n);
-
         }
     }
 
@@ -42,7 +44,7 @@ public class PercolationStats {
 
         System.out.printf("mean                    = %f\n", p.mean());
         System.out.printf("stddev                  = %f\n", p.stddev());
-        System.out.printf("95%% confidence interval = [%f, %f]\n",
+        System.out.printf("95% confidence interval = [%f, %f]\n",
                 p.confidenceLo(), p.confidenceHi());
     }
 }

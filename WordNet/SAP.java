@@ -24,7 +24,6 @@ public class SAP {
         return new CalculateSAP(v, w).length;
     }
 
-
     public int ancestor(Iterable<Integer> v, Iterable<Integer> w) {
         return new CalculateSAP(v, w).ancestor;
     }
@@ -53,7 +52,6 @@ public class SAP {
             BreadthFirstDirectedPaths pathFromW = new BreadthFirstDirectedPaths(G, w);
             calculate(pathFromV, pathFromW);
         }
-
 
         CalculateSAP(Iterable<Integer> v, Iterable<Integer> w) {
             if (v == null || w == null) throw new IllegalArgumentException();

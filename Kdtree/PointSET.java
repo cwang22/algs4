@@ -39,9 +39,11 @@ public class PointSET {
     public Iterable<Point2D> range(RectHV rect) {
         if (rect == null) throw new NullPointerException();
         List<Point2D> results = new ArrayList<>();
+
         for (Point2D point : set) {
             if (rect.contains(point)) results.add(point);
         }
+
         return results;
     }
 
@@ -49,6 +51,7 @@ public class PointSET {
         if (point == null) throw new NullPointerException();
         Point2D result = null;
         double distance = 0.0;
+
         for (Point2D p : set) {
             if (result == null) {
                 result = p;
@@ -58,6 +61,7 @@ public class PointSET {
                 result = p;
             }
         }
+        
         return result;
     }
 }

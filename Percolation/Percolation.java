@@ -29,18 +29,22 @@ public class Percolation {
         sites[row - 1][col - 1] = true;
         int current = index(row, col);
         opens++;
+
         if (row > 1 && isOpen(row - 1, col)) {
             uf.union(current - n, current);
             buf.union(current - n, current);
         }
+
         if (row < n && isOpen(row + 1, col)) {
             uf.union(current + n, current);
             buf.union(current + n, current);
         }
+
         if (col > 1 && isOpen(row, col - 1)) {
             uf.union(current - 1, current);
             buf.union(current - 1, current);
         }
+        
         if (col < n && isOpen(row, col + 1)) {
             uf.union(current + 1, current);
             buf.union(current + 1, current);

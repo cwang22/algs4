@@ -33,6 +33,7 @@ public class Deque<Item> implements Iterable<Item> {
     public void addFirst(Item item) {
         if (item == null) throw new NullPointerException();
         Node<Item> n = new Node<>(item);
+
         if (isEmpty()) {
             first = n;
             last = n;
@@ -41,12 +42,14 @@ public class Deque<Item> implements Iterable<Item> {
             n.next = first;
             first = n;
         }
+
         size++;
     }
 
     public void addLast(Item item) {
         if (item == null) throw new NullPointerException();
         Node<Item> n = new Node<>(item);
+
         if (isEmpty()) {
             first = n;
             last = n;
@@ -55,6 +58,7 @@ public class Deque<Item> implements Iterable<Item> {
             n.previous = last;
             last = n;
         }
+
         size++;
     }
 
@@ -63,8 +67,10 @@ public class Deque<Item> implements Iterable<Item> {
         Node<Item> n = first;
         first = first.next;
         size--;
+
         if (isEmpty()) last = null;
         else first.previous = null;
+
         return n.item;
     }
 
@@ -73,8 +79,10 @@ public class Deque<Item> implements Iterable<Item> {
         Node<Item> n = last;
         last = last.previous;
         size--;
+
         if (isEmpty()) first = null;
         else last.next = null;
+        
         return n.item;
     }
 
